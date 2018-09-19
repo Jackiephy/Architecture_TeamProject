@@ -16,14 +16,16 @@ public class Memory {
     Map<Integer,String> memoryMap = new HashMap<>();
     String fileName = "MainMem.txt";
     
-    //   add by Mingqian 
-        file.createNewFile();
-    // next two line used for testing       
-        System.out.println("file name："+file.getName());
-		System.out.println("file path："+file.getPath());
     
     public void readFile(int indexLine){
         File file = new File(fileName);
+	
+	 //   add by Mingqian 
+        file.createNewFile();
+    	// next two line used for testing       
+        System.out.println("file name："+file.getName());
+	System.out.println("file path："+file.getPath());
+	    
         BufferedReader reader = null;
         try{
             reader = new BufferedReader(new FileReader(file));
