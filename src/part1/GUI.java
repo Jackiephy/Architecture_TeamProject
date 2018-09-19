@@ -29,12 +29,16 @@ public class GUI extends JFrame{
 	
     private FileDialog openFile;
     
-    Memory mainMemoryStore;
-    CPU cpu;
- 
+    Memory mainMemoryStore = new Memory();
+    CPU cpu = new CPU();
+	
+	 
     public GUI() {
+    	 
         init();
         addEvents();
+        
+   
     }
 	
     public void init() {
@@ -43,16 +47,16 @@ public class GUI extends JFrame{
     	jpProcessState = new JPanel();
     	textfeild = new JPanel();
     	MenuBar menuBar = new MenuBar();
-       
+        // 菜单
     	Menu menu = new Menu("choose");
-       
+        // 菜单项
     	show=new MenuItem("project1");
-      
+        // 菜单添加菜单项
         menu.add(show);
-     
+        // 菜单栏添加菜单
         menuBar.add(menu);
         f.setMenuBar(menuBar);
-
+        //文本域
        
      
 
@@ -220,6 +224,7 @@ public class GUI extends JFrame{
                  String fileName=openFile.getFile();
                  System.out.println(dirName);
                  
+                 //读取展示文件
                  if(dirName==null || fileName==null){
                      return;
                  }
@@ -245,7 +250,24 @@ public class GUI extends JFrame{
     	 execute.addActionListener(new ActionListener() {
              
              public void actionPerformed(ActionEvent e) {
-//            	 t_pc.setText( Integer.toString(cpu.getPC()));
+            	 t_pc.setText(Integer.toString( cpu.getPC()));
+            	 t_cc.setText(cpu.getCC());
+            	 t_IR.setText(cpu.getIR());
+            	 t_MAR.setText(Integer.toString( cpu.getMAR()));
+            	 t_MBR.setText(cpu.getMBR());
+            	 t_MSR.setText(cpu.getMSR());
+            	 t_MFR.setText(Integer.toString( cpu.getMFR()));
+            	 t_IAR.setText(Integer.toString( cpu.getIAR()));
+            	 t_IRR.setText(cpu.getIRR());
+            	 t_R0.setText(cpu.getR0());
+            	 t_R1.setText(cpu.getR1());
+            	 t_R2.setText(cpu.getR2());
+            	 t_R3.setText(cpu.getR3());
+            	 t_X1.setText(Integer.toString( cpu.getX1()));
+            	 t_X2.setText(Integer.toString( cpu.getX2()));
+            	 t_X3.setText(Integer.toString( cpu.getX3()));
+            	 
+            	
              }
          });
     	 
@@ -258,3 +280,4 @@ public class GUI extends JFrame{
 //	  
 //	    }
 }
+
