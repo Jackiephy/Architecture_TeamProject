@@ -193,6 +193,20 @@ public class CPU {
         return MBR;
     }
     
+       //add this by Mingqian (need check)
+    public String getMSR(){
+       return MSR;
+    }
+    
+    public int getIAR(){
+        return this.IAR;
+    }
+    
+    public String getIRR(){
+        return this.IRR;
+    }
+    // end
+    
     public String getIR(){
         System.out.println(IR);
         return this.IR;
