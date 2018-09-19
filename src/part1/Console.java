@@ -8,7 +8,9 @@ import java.awt.EventQueue;
 */
 public class Console {
 	public static void main(String[] args) {
-        //GUI show        
+        //GUI show    
+	GUI ui = new GUI();
+		
         EventQueue.invokeLater(new Runnable(){
             public void run(){
                 new Console();
