@@ -21,13 +21,16 @@ public class GUI extends JFrame{
 	private JButton execute;
 	private StringBuilder text;
 	
+	private JTextArea text_console;  //NEW BY Alina
 	private JLabel pc,cc,IR,MAR,MBR,MSR,MFR,IAR,IRR,R0,R1,R2,R3,X1,X2,X3 = null;
 	private JTextField t_pc,t_cc,t_IR,t_MAR,t_MBR,t_MSR,t_MFR,t_IAR,t_IRR,t_R0,t_R1,t_R2,t_R3,t_X1,t_X2,t_X3 = null;
 	private JPanel jp;
 	private JPanel jpProcessState;
 	private JPanel textfeild;
-	
-    private FileDialog openFile;
+	private String getTextPC, getTextR0, getTextR1, getTextR2, getTextR3, getTextX1, getTextX2, getTextX3, getTextMAR, getTextMBR, getTextIR; //NEW BY Alina
+	boolean Single = false, Continue = true; //NEW BY Alina
+	public String ConsoleString = ""; //NEW BY Alina
+    private FileDialog openFile; //NEW BY Alina
     
     Memory mainMemoryStore = new Memory();
     CPU cpu = new CPU();
@@ -47,16 +50,16 @@ public class GUI extends JFrame{
     	jpProcessState = new JPanel();
     	textfeild = new JPanel();
     	MenuBar menuBar = new MenuBar();
-        // 菜单
+        // 鑿滃崟
     	Menu menu = new Menu("choose");
-        // 菜单项
+        // 鑿滃崟椤�
     	show=new MenuItem("project1");
-        // 菜单添加菜单项
+        // 鑿滃崟娣诲姞鑿滃崟椤�
         menu.add(show);
-        // 菜单栏添加菜单
+        // 鑿滃崟鏍忔坊鍔犺彍鍗�
         menuBar.add(menu);
         f.setMenuBar(menuBar);
-        //文本域
+        //鏂囨湰鍩�
        
      
 
@@ -69,6 +72,9 @@ public class GUI extends JFrame{
         
         ta=new JTextArea(20,20);
         ta.setBounds(30, 100, 200, 300);
+        
+        text_console=new JTextArea(30,30);
+        text_console.setBounds(40,100,200,300);
  
         
         pc = new JLabel("PC");
@@ -224,7 +230,7 @@ public class GUI extends JFrame{
                  String fileName=openFile.getFile();
                  System.out.println(dirName);
                  
-                 //读取展示文件
+                 //璇诲彇灞曠ず鏂囦欢
                  if(dirName==null || fileName==null){
                      return;
                  }
@@ -249,35 +255,238 @@ public class GUI extends JFrame{
     	 
     	 execute.addActionListener(new ActionListener() {
              
-             public void actionPerformed(ActionEvent e) {
-            	 t_pc.setText(Integer.toString( cpu.getPC()));
-            	 t_cc.setText(cpu.getCC());
-            	 t_IR.setText(cpu.getIR());
-            	 t_MAR.setText(Integer.toString( cpu.getMAR()));
-            	 t_MBR.setText(cpu.getMBR());
-            	 t_MSR.setText(cpu.getMSR());
-            	 t_MFR.setText(Integer.toString( cpu.getMFR()));
-            	 t_IAR.setText(Integer.toString( cpu.getIAR()));
-            	 t_IRR.setText(cpu.getIRR());
-            	 t_R0.setText(cpu.getR0());
-            	 t_R1.setText(cpu.getR1());
-            	 t_R2.setText(cpu.getR2());
-            	 t_R3.setText(cpu.getR3());
-            	 t_X1.setText(Integer.toString( cpu.getX1()));
-            	 t_X2.setText(Integer.toString( cpu.getX2()));
-            	 t_X3.setText(Integer.toString( cpu.getX3()));
-            	 
-            	
-             }
+    		 public void actionPerformed(ActionEvent e) {
+	                getTextPC = t_pc.getText();
+	                getTextR0 = t_R0.getText();
+	                getTextR1 = t_R1.getText();
+	                getTextR2 = t_R2.getText();
+	                getTextR3 = t_R3.getText();
+	                getTextX1 = t_X1.getText();
+	                getTextX2 = t_X2.getText();    
+	                getTextX3 = t_X3.getText();
+	                getTextMAR = t_MAR.getText();
+	                getTextMBR = t_MBR.getText();
+	                getTextIR = t_IR.getText();
+	                
+	              //NEW BY Alina
+	                System.out.println(getTextPC);
+	                System.out.println(getTextR0);
+	                ShowNumberR(getTextR0, getTextR1, getTextR2, getTextR3, cpu.getR0(), cpu.getR1(), cpu.getR2(), cpu.getR3(), false);
+	                ShowNumberX(getTextX1, getTextX2, getTextX3, cpu.getX1(), cpu.getX2(), cpu.getX3(), false);
+	                ShowNumberO(getTextPC, getTextMAR, getTextMBR, getTextIR, cpu.getPC(), cpu.getMAR(), cpu.getMBR(), cpu.getIR(), false);
+	                Continue = false;
+	            }
          });
     	 
     }
     
+  //NEW BY Alina
+    private void ShowNumberO(String TextPC, String TextMAR, String TextMBR, String TextIR, int CPU_PC, int CPU_MAR, String CPU_MBR, String CPU_IR, boolean showO){
+        int NumPC, NumMAR, NumMBR, NumIR;
+        //show PC
+        System.out.println("A");
+        if(!(TextPC.equals(""))){
+            NumPC = Integer.parseInt(TextPC);
+            if(NumPC>0 && NumPC<4096){
+                NumPC = NumPC;
+                cpu.setPC(NumPC);                
+                ConsoleString = ConsoleString + "\r\nchange PC to "+TextPC;
+                this.text_console.setText(ConsoleString);
+            }
+            else{
+                NumPC = CPU_PC;
+            }
+        }
+        else{
+            NumPC = CPU_PC;
+        }
+        System.out.println("B");
+        
+        //show MAR
+        if(!(TextMAR.equals(""))){
+            NumMAR = Integer.parseInt(TextMAR);
+            if(NumMAR>0 && NumMAR<65536){
+                NumMAR = NumMAR;
+                cpu.setMAR(NumMAR);
+                ConsoleString = ConsoleString + "\r\nchange MAR to "+TextMAR;
+                this.text_console.setText(ConsoleString);
+            }
+            else{
+                NumMAR = CPU_MAR;
+            }
+        }
+        else{
+            NumMAR = CPU_MAR;
+        }
+            
+        //show MBR
+        if(!(TextMBR.equals(""))){
+            NumMBR = Integer.parseInt(TextMBR);
+            if(NumMBR>0 && NumMBR<65536){
+                NumMBR = NumMBR;
+                cpu.setMBR(TextMBR);
+                ConsoleString = ConsoleString + "\r\nchange MBR to "+TextMBR;
+                this.text_console.setText(ConsoleString);
+            }
+            else{
+                NumMBR = Integer.parseInt(CPU_MBR);
+            }
+        }
+        else{
+            NumMBR = Integer.parseInt(CPU_MBR);
+        }
+        
+        //show IR
+        if(!(TextIR.equals(""))){
+            NumIR = Integer.parseInt(TextIR);
+            if(NumIR>0 && NumIR<65536){
+                NumIR = NumIR;
+                cpu.setIR(TextIR);
+                ConsoleString = ConsoleString + "\r\nchange IR to "+TextIR;
+                this.text_console.setText(ConsoleString);
+            }
+            else{
+                NumIR = Integer.parseInt(CPU_IR);
+            }
+        }
+        else{
+            NumIR = Integer.parseInt(CPU_IR);
+        }     
+
+    }
     
+  //NEW BY Alina
+    private void ShowNumberR(String TextR0, String TextR1, String TextR2, String TextR3, String CPU_R0, String CPU_R1, String CPU_R2, String CPU_R3, boolean showR){
+        int NumR0, NumR1, NumR2, NumR3;
+        //show R0
+        if(!(TextR0.equals(""))){
+            NumR0 = Integer.parseInt(TextR0);
+            if(NumR0>0 && NumR0<65536){
+                NumR0 = NumR0;
+                cpu.setGeneralRegister(0, TextR0);
+                ConsoleString = ConsoleString + "\r\nchange R0 to "+TextR0;
+                this.text_console.setText(ConsoleString);
+            }
+            else{
+                NumR0 = Integer.parseInt(CPU_R0);
+            }
+        }
+        else{
+            NumR0 = Integer.parseInt(CPU_R0);
+        }
+        
+        //show R1
+        if(!(TextR1.equals(""))){
+            NumR1 = Integer.parseInt(TextR1);
+            if(NumR1>0 && NumR1<65536){
+                NumR1 = NumR1;
+                cpu.setGeneralRegister(1, TextR1);
+                ConsoleString = ConsoleString + "\r\nchange R1 to "+TextR1;
+                this.text_console.setText(ConsoleString);
+            }
+            else{
+                NumR1 = Integer.parseInt(CPU_R1);
+            }
+        }
+        else{
+            NumR1 = Integer.parseInt(CPU_R1);
+        }
+        
+        //show R2
+        if(!(TextR2.equals(""))){
+            NumR2 = Integer.parseInt(TextR2);
+            if(NumR2>0 && NumR2<65536){
+                NumR2 = NumR2;
+                cpu.setGeneralRegister(1, TextR1);
+                ConsoleString = ConsoleString + "\r\nchange R2 to "+TextR2;
+                this.text_console.setText(ConsoleString);
+            }
+            else{
+                NumR2 = Integer.parseInt(CPU_R2);
+            }
+        }
+        else{
+            NumR2 = Integer.parseInt(CPU_R2);
+        }
+        
+        //show R3
+        if(!(TextR3.equals(""))){
+            NumR3 = Integer.parseInt(TextR3);
+            if(NumR3>0 && NumR3<65536){
+                NumR3 = NumR3;
+                cpu.setGeneralRegister(3, TextR3);
+                ConsoleString = ConsoleString + "\r\nchange R3 to "+TextR3;
+                this.text_console.setText(ConsoleString);
+            }
+            else{
+                NumR3 = Integer.parseInt(CPU_R1);
+            }
+        }
+        else{
+            NumR3 = Integer.parseInt(CPU_R3);
+        }
+        
+    }
     
-//	 public static void main(String[] args) {
-//	        new GUI();
-//	  
-//	    }
+  //NEW BY Alina
+    private void ShowNumberX(String TextX1, String TextX2, String TextX3, int CPU_X1, int CPU_X2, int CPU_X3, boolean showX){
+        int NumX1, NumX2, NumX3;
+        //show X1
+        if(!(TextX1.equals(""))){
+            NumX1 = Integer.parseInt(TextX1);
+            if(NumX1>0 && NumX1<65536){
+                NumX1 = NumX1;
+                cpu.setIndexRegister(0, NumX1);
+                ConsoleString = ConsoleString + "\r\nchange X1 to "+TextX1;
+                this.text_console.setText(ConsoleString);
+            }
+            else{
+                NumX1 = CPU_X1;
+            }
+        }
+        else{
+            NumX1 = CPU_X1;
+        }
+        
+        //show X2
+        if(!(TextX2.equals(""))){
+            NumX2 = Integer.parseInt(TextX2);
+            if(NumX2>0 && NumX2<65536){
+                NumX2 = NumX2;
+                cpu.setIndexRegister(1, NumX2);
+                ConsoleString = ConsoleString + "\r\nchange X2 to "+TextX2;
+                this.text_console.setText(ConsoleString);
+            }
+            else{
+                NumX2 = CPU_X2;
+            }
+        }
+        else{
+            NumX2 = CPU_X2;
+        }
+
+        //show X3
+        if(!(TextX3.equals(""))){
+            NumX3 = Integer.parseInt(TextX3);
+            if(NumX3>0 && NumX3<65536){
+                NumX3 = NumX3;
+                cpu.setIndexRegister(2, NumX3);
+                ConsoleString = ConsoleString + "\r\nchange X3 to "+TextX3;
+                this.text_console.setText(ConsoleString);
+            }
+            else{
+                NumX3 = CPU_X3;
+            }
+        }
+        else{
+            NumX3 = CPU_X3;
+        }
+        
+    }
+    
+	 public static void main(String[] args) {
+	        new GUI();
+	  
+	    }
 }
 
