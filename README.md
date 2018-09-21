@@ -15,6 +15,7 @@ Attachment:LDR 3,0,31
            LDA 2,0,17
            LDX 2,12
            STX 1,25;
+           
 09/21/2018 modify console.java and GUI.java
 1.redesign the UI;  Modify Console.java as the main class;
 2.modify the console.java trying to build connection for functions
