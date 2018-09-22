@@ -16,6 +16,7 @@ public class GUI extends JFrame{
 	public Frame f;
 	
 	private JButton openfile;
+	private MenuItem show;
 	private BufferedReader br;
 	public JTextArea ta;
 	private JButton execute;
@@ -24,7 +25,6 @@ public class GUI extends JFrame{
 	private JLabel console;
 	public StringBuilder text;
 	private JButton stepByStep;
-	private JButton clear;
 	
 	
 	private JLabel pc,cc,IR,MAR,MBR,MSR,MFR,IAR,IRR,R0,R1,R2,R3,X1,X2,X3 = null;
@@ -69,10 +69,6 @@ public class GUI extends JFrame{
         
         stepByStep = new JButton("StepByStep");
         stepByStep.setBounds(230, 80, 100, 30);
-        
-        clear = new JButton("clear");
-        clear.setBounds(280, 460, 80, 30);
-
         
         IPL = new JButton("IPL");
         IPL.setBounds(30, 20, 60, 50);
@@ -154,42 +150,17 @@ public class GUI extends JFrame{
         t_X3.setBounds(10, 385, 100, 25);
         
         saveNum = new JButton("SaveNumbers");
-        saveNum.setBounds(0, 430, 125, 25);
+        saveNum.setBounds(0, 420, 125, 25);
         
         indicate = new JTextField[16][16] ;
-      
-//     	for(int i=0;i<10;i++){
-//     		   indicate[i][0]= new JTextField(" ");
-//     		   indicate[i][0].setBounds(15*i, 10, 13, 25);
-//     		   binaryIndicate.add(indicate[i][0]);
-//     	   }
-//     	for(int i=0;i<4;i++){
-//  		   indicate[i][1]= new JTextField(" ");
-//  		   indicate[i][1].setBounds(15*i, 10+25*1, 13, 25);
-//  		   binaryIndicate.add(indicate[i][1]);
-//  		   indicate[i][6]= new JTextField(" ");
-//		   indicate[i][6].setBounds(15*i, 10+25*6, 13, 25);
-//		   binaryIndicate.add(indicate[i][6]);
-//  	   }
-//     	
-//        for(int j = 2;j<16;j++){
-//    	   for(int i=0;i<16;i++){
-//    		   if(j!=6){
-//    		   indicate[i][j]= new JTextField(" ");
-//    		   indicate[i][j].setBounds(15*i, 10+25*j, 13, 25);
-//    		   binaryIndicate.add(indicate[i][j]);
-//    		   }
-//    	   }
-//       }
-      for(int j = 0;j<16;j++){
-  	   for(int i=0;i<16;i++){
-  		 
-  		   indicate[i][j]= new JTextField(" ");
-  		   indicate[i][j].setBounds(15*i, 10+25*j, 13, 25);
-  		   binaryIndicate.add(indicate[i][j]);
-  		   
-  	   }
-     }
+       for(int i = 0;i<16;i++){
+    	   for(int j=0;j<16;j++){
+    		   indicate[i][j]= new JTextField(" ");
+    		   indicate[i][j].setBounds(15*i, 10+25*j, 13, 25);
+    		   binaryIndicate.add(indicate[i][j]);
+    	   }
+       }
+        
         
         f.setBounds(500,300,900, 550);
         f.setLayout(null);
@@ -201,7 +172,6 @@ public class GUI extends JFrame{
         jp.add(openfile);
         jp.add(execute);
         jp.add(stepByStep);
-        jp.add(clear);
         jp.add(IPL);
         jp.add(ta);
         jp.add(console);
@@ -277,7 +247,16 @@ public class GUI extends JFrame{
                  System.exit(0);
              }
          });
- 
+    	 
+//    	 show.addActionListener(new ActionListener() {
+//             
+//             public void actionPerformed(ActionEvent e) {
+//            	 jpProcessState.setVisible(true); 
+//            	 jp.setVisible(true);
+//            	 textfeild.setVisible(true);
+//             }
+//         });
+//    	 
     	 
     	 openfile.addActionListener(new ActionListener() {
              
@@ -344,7 +323,23 @@ public class GUI extends JFrame{
              
              public void actionPerformed(ActionEvent e) {
             	 state = true;
-            	 IPL.setBackground(Color.green);
+//            	 t_pc.setText("0");
+//            	 t_cc.setText("0");
+//            	 t_IR.setText("0");
+//            	 t_MAR.setText("0");
+//            	 t_MBR.setText("0");
+//            	 t_MSR.setText("0");
+//            	 t_MFR.setText("0");
+//            	 t_IAR.setText("0");
+//            	 t_IRR.setText("0");
+//            	 t_R0.setText("0");
+//            	 t_R1.setText("0");
+//           	 t_R2.setText("0");
+//           	 t_R3.setText("0");
+//            	 t_X1.setText("0");
+//            	 t_X2.setText("0");
+//            	 t_X3.setText("0");
+            	 
             	con.initial();
              }
          });
@@ -355,15 +350,6 @@ public class GUI extends JFrame{
 	                System.out.println("Sin");
 	                con.Single();
 	            }
-    	 });
-    	 
-    	 clear.addActionListener(new ActionListener() {
-             
-             public void actionPerformed(ActionEvent e) {
-            	 System.out.println("Clear");
-            	 con.ConsoleString = "";
-            	 ta.setText("");
-             }
     	 });
     	 
     	 saveNum.addActionListener(new ActionListener() {
