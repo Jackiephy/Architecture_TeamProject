@@ -21,3 +21,8 @@ Attachment:LDR 3,0,31
 2.modify the console.java trying to build connection for functions
 3.Unfortunately，the trying has not been sucessful
 4.ask for back-end help
+
+05/10/2018 New Submit:
+1. Add part2 with the program1.java of Team 2;
+2. Update the contents of the project;
+3. Create a new file called Instructions, all the instructions required in the class project is written into that file, please check if my comprehension of these instructions are correct.
