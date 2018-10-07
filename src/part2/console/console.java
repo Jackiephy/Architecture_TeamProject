@@ -1,36 +1,28 @@
-package buffer;
-//package part2.console;
-
+package console;
 import java.awt.*;
 import java.awt.event.ActionEvent;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.net.URL;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 
-import part2.memory.Cache;
 
 
-import part2.cpu.CPU;
-import part2.memory.MCU;
-import part2.memory.Memory;
+import javax.swing.*;
 
-import part2.memory.Memory;
-import part2.memory.MCU;
-import part2.cpu.CPU;
-import part2.util.Const;
-import part2.util.Program1;
-import part2.instruction.*;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
 
-import part2.memory.Cache;
-import part2.util.MachineFaultException;
-import part2.util.StringUtil;
-
+import cpu.CPU;
+import instruction.Abstractinstruction;
+import memory.Cache;
+import memory.MCU;
+import memory.Memory;
+import util.Const;
+import util.MachineFaultException;
+import util.Program1;
+import util.StringUtil;
 public class console extends JFrame{
 
 	   private JFrame frame;
