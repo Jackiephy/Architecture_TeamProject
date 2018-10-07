@@ -1,4 +1,4 @@
-package part2.util;
+package util;
 
 import java.util.HashMap;
 
@@ -45,7 +45,7 @@ public class Const {
     }
     
     public enum ConditionCode {
-	OVERFLOW(0), UNDERFLOW(1), DIVZERO(2), EQUALORNOT(3);
+	OVERFLOW(0), UNDERFLOW(1), DIVZERO(2), EQUALORNOT(3); 
 	int value;
 
 	private ConditionCode(int value) {

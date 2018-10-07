@@ -1,7 +1,7 @@
-package part2.memory;
+package memory;
 
 import java.util.LinkedList;
-import part2.util.Const;
+import util.Const;
 
 /**
  *

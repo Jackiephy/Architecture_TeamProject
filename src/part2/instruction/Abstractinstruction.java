@@ -1,8 +1,8 @@
-package part2.instruction;
+package instruction;
 
-import part2.cpu.CPU;
-import part2.memory.MCU;
-import part2.util.MachineFaultException;
+import cpu.CPU;
+import memory.MCU;
+import util.MachineFaultException;
 
 
 /**

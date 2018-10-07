@@ -1,7 +1,7 @@
-package part2.instruction;
+package instruction;
 
-import part2.memory.MCU;
-import part2.cpu.CPU;
+import memory.MCU;
+import cpu.CPU;
 
 /**
  *

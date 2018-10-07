@@ -1,11 +1,11 @@
-package part2.instruction;
+package instruction;
 
-import part2.cpu.CPU;
-import part2.memory.MCU;
-import part2.util.Const;
-import part2.util.EffectiveAddress;
-import part2.util.MachineFaultException;
-import part2.util.StringUtil;
+import cpu.CPU;
+import memory.MCU;
+import util.Const;
+import util.EffectiveAddress;
+import util.MachineFaultException;
+import util.StringUtil;
 
 /**
  *
@@ -36,12 +36,8 @@ public class RRC extends Abstractinstruction {
 		String y = null; // second part of the content
 		String z = null; // string form of content of the register
 
-		z = Integer.toBinaryString(Bd);
-		if (Bd >= 0)
-			;
-		z = z.replace("0000000000000000", "");
-		if (Bd < 0)
-			z = z.replaceAll("1111111111111111", "");
+		z = StringUtil.decimalToBinary(Bd, 16);
+		
 
 		if (LR == 1) {
 			x = z.substring(Ct, z.length());

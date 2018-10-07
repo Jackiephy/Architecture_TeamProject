@@ -1,4 +1,4 @@
-package part2.memory;
+package memory;
 
 /**
  *
@@ -9,7 +9,7 @@ import java.io.File;
 import java.io.FileReader;
 import java.util.HashMap;
 import java.util.Map;
-import part2.util.Const;
+import util.Const;
 
 import java.util.ArrayList;
 

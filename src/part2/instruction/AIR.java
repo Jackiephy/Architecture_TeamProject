@@ -1,11 +1,11 @@
-package part2.instruction;
+package instruction;
 
-import part2.cpu.CPU;
-import part2.memory.MCU;
-import part2.util.Const;
-import part2.util.EffectiveAddress;
-import part2.util.MachineFaultException;
-import part2.util.StringUtil;
+import cpu.CPU;
+import memory.MCU;
+import util.Const;
+import util.EffectiveAddress;
+import util.MachineFaultException;
+import util.StringUtil;
 
 /**
  *
@@ -31,29 +31,33 @@ public class AIR extends Abstractinstruction {
 
         // this is the immediate operand.
         immed = StringUtil.binaryToDecimal(instruction.substring(11, 16));
+        
+        int result=0;
 
         // if immed = 0, we do nothing
         if (immed != 0) {
             if (cpu.getRnByNum(r) == 0) {
 
                 // if c(r) = 0, we load r with immed
-                cpu.setRnByNum(r, immed);
+            	result=immed;
+                //cpu.setRnByNum(r, immed);
 
             } else {
 
                 // r <- c(r) + immed
 
-                int result = cpu.getRnByNum(r) + immed;
+                result = cpu.getRnByNum(r) + immed;
                 
-                // we check if we have an overflow
-                if (result > Integer.MAX_VALUE || result < Integer.MIN_VALUE) {
-                    cpu.setCCElementByBit(Const.ConditionCode.OVERFLOW.getValue(), true);
-                } else {
-                    // if we do not have an overflow, we update the value of
-                    // register
-                    cpu.setRnByNum(r, result);
-                }
+                
             }
+        }
+        // we check if we have an overflow
+        if (result > Integer.MAX_VALUE || result < Integer.MIN_VALUE) {
+            cpu.setCCElementByBit(Const.ConditionCode.OVERFLOW.getValue(), true);
+        } else {
+            // if we do not have an overflow, we update the value of
+            // register
+            cpu.setRnByNum(r, result);
         }
 
         cpu.increasePC();

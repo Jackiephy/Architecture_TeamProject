@@ -1,4 +1,4 @@
-package part2.util;
+package util;
 
 /**
  *
@@ -60,4 +60,9 @@ public class StringUtil {
 
 	}
 
+	public static String decimalToBinaryFetch(int decimal, int bitLength) {
+		String str = null;
+		return str;
+	}
+	
 }

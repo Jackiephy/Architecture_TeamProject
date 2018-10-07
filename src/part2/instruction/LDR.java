@@ -1,10 +1,10 @@
-package part2.instruction;
+package instruction;
 
-import part2.memory.MCU;
-import part2.util.StringUtil;
-import part2.cpu.CPU;
-import part2.util.EffectiveAddress;
-import part2.util.MachineFaultException;
+import memory.MCU;
+import util.StringUtil;
+import cpu.CPU;
+import util.EffectiveAddress;
+import util.MachineFaultException;
 /**
  *
  * @author Alina

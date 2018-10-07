@@ -1,13 +1,13 @@
-package part2.memory;
+package memory;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-import part2.memory.Memory;
+import memory.Memory;
 
-import part2.memory.Cache.CacheLine;
-import part2.util.Const;
+import memory.Cache.CacheLine;
+import util.Const;
 
 /**
  *

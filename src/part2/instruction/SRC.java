@@ -1,11 +1,11 @@
-package part2.instruction;
+package instruction;
 
-import part2.cpu.CPU;
-import part2.memory.MCU;
-import part2.util.Const;
-import part2.util.EffectiveAddress;
-import part2.util.MachineFaultException;
-import part2.util.StringUtil;
+import cpu.CPU;
+import memory.MCU;
+import util.Const;
+import util.EffectiveAddress;
+import util.MachineFaultException;
+import util.StringUtil;
 
 /**
  *
@@ -32,15 +32,7 @@ public class SRC extends Abstractinstruction {
         this.r = StringUtil.binaryToDecimal(instruction.substring(6, 8));
         int Bd = cpu.getRnByNum(r);
         if (AL == 0) {
-            if (LR == 0) {
-                Bd = Bd >> Ct;
-            }
-            if (LR == 1) {
-                Bd = Bd << Ct;
-            }
-        }
-        if (AL == 1) {
-            if (LR == 0) {
+        	if (LR == 0) {
                 if (Bd >= 0)
                     Bd = (Bd >>> Ct);
                 else {
@@ -48,6 +40,14 @@ public class SRC extends Abstractinstruction {
                     x = x.replace("1111111111111111", "");
                     Bd = Integer.parseInt(x, 2);
                 }
+            }
+            if (LR == 1) {
+                Bd = Bd << Ct;
+            }
+        }
+        if (AL == 1) {
+            if (LR == 0) {
+                Bd = Bd >> Ct;
             }
             if (LR == 1) {
                 Bd = Bd << Ct;

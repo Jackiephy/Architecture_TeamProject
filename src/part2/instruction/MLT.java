@@ -1,11 +1,11 @@
-package part2.instruction;
+package instruction;
 
-import part2.cpu.CPU;
-import part2.memory.MCU;
-import part2.util.Const;
-import part2.util.EffectiveAddress;
-import part2.util.MachineFaultException;
-import part2.util.StringUtil;
+import cpu.CPU;
+import memory.MCU;
+import util.Const;
+import util.EffectiveAddress;
+import util.MachineFaultException;
+import util.StringUtil;
 
 /**
  *
@@ -31,6 +31,7 @@ public class MLT extends Abstractinstruction {
 		rx = StringUtil.binaryToDecimal(instruction.substring(6, 8));
 		ry = StringUtil.binaryToDecimal(instruction.substring(8, 10));
 
+		
 		// first we should check the below condition:
 		// rx must be 0 or 2
 		// AND
@@ -38,7 +39,7 @@ public class MLT extends Abstractinstruction {
 		if ((rx == 0 || rx == 2) && (ry == 0 || ry == 2)) {
 
 			// doing the multiplication
-			double result = cpu.getRnByNum(rx) * cpu.getRnByNum(ry);
+			int result = cpu.getRnByNum(rx) * cpu.getRnByNum(ry);
 
 			// we check if we have an overflow
 			if (result > Integer.MAX_VALUE || result < Integer.MIN_VALUE) { // TODO
@@ -47,10 +48,10 @@ public class MLT extends Abstractinstruction {
 				cpu.setCCElementByBit(Const.ConditionCode.OVERFLOW.getValue(), true);
 			} else {
 				// rx contains the high order bits of the result
-				cpu.setRnByNum(rx, getHighOrderBits((int) result));
+				cpu.setRnByNum(rx, getHighOrderBits(result));
 
 				// rx+1 contains the low order bits of the result
-				cpu.setRnByNum(rx + 1, getLowOrderBits((int) result));
+				cpu.setRnByNum(rx + 1, getLowOrderBits(result));
 			}
 		}
 
@@ -65,12 +66,12 @@ public class MLT extends Abstractinstruction {
 
 	// getting the low 16 bits of an integer
 	private int getLowOrderBits(int x) {
-		return (x & 0xFFFF);
+		return (x << 8)>> 8;
 	}
 
 	// getting the high 16 bits of an integer
 	private int getHighOrderBits(int x) {
-		return x >> 16;
+		return x >> 8;
 	}
 
 }

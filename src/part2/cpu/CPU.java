@@ -1,6 +1,6 @@
-package part2.cpu;
+package cpu;
 
-import part2.memory.Memory;
+import memory.Memory;
 
 /**
  *
@@ -283,10 +283,11 @@ public class CPU {
     public void setCCElementByBit(int bitNum, boolean flag) {
         if (flag) {
             this.cc = (this.cc | (1 << bitNum));
-        } else {
+        } 
+        /*else {
             int mask = ~(1 << bitNum);
             this.cc = this.cc & mask;
-        }
+        }*/
     }
     
     public boolean getCCElementByBit(int bitNum) {

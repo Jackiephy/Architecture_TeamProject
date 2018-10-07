@@ -1,11 +1,11 @@
-package part2.instruction;
+package instruction;
 
-import part2.cpu.CPU;
-import part2.memory.MCU;
-import part2.util.Const;
-import part2.util.EffectiveAddress;
-import part2.util.MachineFaultException;
-import part2.util.StringUtil;
+import cpu.CPU;
+import memory.MCU;
+import util.Const;
+import util.EffectiveAddress;
+import util.MachineFaultException;
+import util.StringUtil;
 
 /**
  *
