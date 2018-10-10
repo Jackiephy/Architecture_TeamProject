@@ -11,7 +11,7 @@ public class Const {
     /**
      *    Const in system
      */
-    public static final Integer CACHE_LINES = 16;
+    public static final Integer CACHE_LINES = 32;
     public static final Integer PG1_BASE_1 = 300;
     public static final Integer PG1_END_1 = 370;
     public static final Integer PG1_BASE_2 = 500;
