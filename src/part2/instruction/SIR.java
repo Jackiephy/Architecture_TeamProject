@@ -31,30 +31,29 @@ public class SIR extends Abstractinstruction {
 
         // this is the immediate operand
         immed = StringUtil.binaryToDecimal(instruction.substring(11, 16));
-        
-        int result=0;
 
         // if immed = 0, we do nothing
         if (immed != 0) {
             // if c(r) = 0, we load r1 with -(immed)
             if (cpu.getRnByNum(r) == 0) {
-               result=-immed;
-               
+                cpu.setRnByNum(1, -immed);
             } else {
+
                 // r <- c(r) - immed
-                result = cpu.getRnByNum(r) - immed;
-              
+
+                double result = cpu.getRnByNum(r) - immed;
+
+                // we check if we have an overflow
+                if (result > Integer.MAX_VALUE || result < Integer.MIN_VALUE) {
+                	// TODO not sure
+                    cpu.setCCElementByBit(Const.ConditionCode.OVERFLOW.getValue(), true);
+                } else {
+                    // updating the value of register if there is no overflow
+                    cpu.setRnByNum(r, (int) result);
+                }
             }
         }
-        
-        // we check if we have an overflow
-        if (result > Integer.MAX_VALUE || result < Integer.MIN_VALUE) {
-        	// TODO not sure
-            cpu.setCCElementByBit(Const.ConditionCode.OVERFLOW.getValue(), true);
-        } else {
-            // updating the value of register if there is no overflow
-            cpu.setRnByNum(r, result);
-        }
+
         cpu.increasePC();
 
     }

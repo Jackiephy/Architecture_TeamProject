@@ -31,33 +31,29 @@ public class AIR extends Abstractinstruction {
 
         // this is the immediate operand.
         immed = StringUtil.binaryToDecimal(instruction.substring(11, 16));
-        
-        int result=0;
 
         // if immed = 0, we do nothing
         if (immed != 0) {
             if (cpu.getRnByNum(r) == 0) {
 
                 // if c(r) = 0, we load r with immed
-            	result=immed;
-                //cpu.setRnByNum(r, immed);
+                cpu.setRnByNum(r, immed);
 
             } else {
 
                 // r <- c(r) + immed
 
-                result = cpu.getRnByNum(r) + immed;
+                int result = cpu.getRnByNum(r) + immed;
                 
-                
+                // we check if we have an overflow
+                if (result > Integer.MAX_VALUE || result < Integer.MIN_VALUE) {
+                    cpu.setCCElementByBit(Const.ConditionCode.OVERFLOW.getValue(), true);
+                } else {
+                    // if we do not have an overflow, we update the value of
+                    // register
+                    cpu.setRnByNum(r, result);
+                }
             }
-        }
-        // we check if we have an overflow
-        if (result > Integer.MAX_VALUE || result < Integer.MIN_VALUE) {
-            cpu.setCCElementByBit(Const.ConditionCode.OVERFLOW.getValue(), true);
-        } else {
-            // if we do not have an overflow, we update the value of
-            // register
-            cpu.setRnByNum(r, result);
         }
 
         cpu.increasePC();

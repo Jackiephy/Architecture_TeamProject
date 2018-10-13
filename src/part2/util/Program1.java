@@ -24,11 +24,11 @@ public class Program1 {
          * R0 use to set value
          */
         PG1_20.put("300", 0x7c8f);      //SRC set R0=0
-        PG1_20.put("301", 0xf3e);       //LDA R3<-c(30)
+        PG1_20.put("301", 0xf3e);       //LDR R3<-c(30)
         
         // read loop entrence
         // input ',' ?
-        PG1_20.put("302", 0xe26);       //LDA R2<-c(6)
+        PG1_20.put("302", 0xe26);       //LDR R2<-c(6)
         PG1_20.put("303", 0xf500);      //IN  R1<-input
         PG1_20.put("304", 0x5980);      //TRR R3==R0 ? cc(3)=1:cc(3)=0
         PG1_20.put("305", 0xe3c);       //LDA R2<-c(28)
