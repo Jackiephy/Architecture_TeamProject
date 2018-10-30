@@ -26,3 +26,8 @@ Attachment:LDR 3,0,31
 1. Add part2 with the program1.java of Team 2;
 2. Update the contents of the project;
 3. Create a new file called Instructions, all the instructions required in the class project is written into that file, please check if my comprehension of these instructions are correct.
+
+29/10/2018 New Submit:
+1. Add part3 with the program2.java of Team 2;
+2. Add new consts into const.java;
+3. Add ActionListener of Program2 in UI interface but failed to operate it, ask for front-end help.
