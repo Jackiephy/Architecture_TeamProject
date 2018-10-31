@@ -43,7 +43,7 @@ public class console extends JFrame{
 	   
 	   private JTextArea text_console_print, text_console_keyboard;
 	   private JTable text_console_cache;
-	   private JScrollPane scrollPane_cache, scrollPane_global;
+	   private JScrollPane scrollPane_cache, scrollPane_print;
 	   
 	   private JButton button_load,button_find, button_compare,button_read20number,button_execute,button_p1,button_p2,button_enter,button_run,button_halt,button_deposit,button_singlestep,button_console,button_memory,button_IPL;
 	   private JRadioButton[] instruction;
@@ -118,13 +118,25 @@ public class console extends JFrame{
 	    	  
 	    	  label_console_printer = new JLabel("Console Printer");
 	    	  label_console_printer.setBounds(30,45,100,25);
-	    	  
+	    	 
 	    	  
 	    	  text_console_print=new JTextArea(20,20);
 	    	  text_console_print.setBounds(30, 65, 350, 200);
 	    	  text_console_print.setOpaque(true);
 	    	  text_console_print.setBackground(Color.black);
 	    	  text_console_print.setForeground(Color.white);
+	    	  text_console_print.setLineWrap(true);
+	    	  text_console_print.setWrapStyleWord(true);
+	    	 
+	    	  scrollPane_print = new JScrollPane(text_console_print);
+	    	 
+	    	  scrollPane_print.setBounds(30, 65, 350, 200);
+	    	  scrollPane_print.setViewportView(text_console_print);
+	    	  scrollPane_print.setVerticalScrollBarPolicy(  
+	    			  JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED); 
+	    	  
+	    	  
+	    	  
 	    	  
 	    	  label_console_keyboard = new JLabel("Console Keyboard");
 	    	  label_console_keyboard.setBounds(30,263,120,25);
@@ -134,6 +146,8 @@ public class console extends JFrame{
 	          text_console_keyboard.setOpaque(true);
 	          text_console_keyboard.setBackground(Color.white);
 	          text_console_keyboard.setLineWrap(true);
+	          text_console_keyboard.setLineWrap(true);
+	          text_console_keyboard.setWrapStyleWord(true);
 	          
 	          label_console_cache = new JLabel("Cache");
 	          label_console_cache.setBounds(30,435,100,25);
@@ -174,7 +188,8 @@ public class console extends JFrame{
 	          panel_console.setBounds(0,0,400, 850);
 	          panel_console.add(button_IPL);
 	          panel_console.add(label_console_printer);
-	          panel_console.add(text_console_print);
+	          //panel_console.add(text_console_print);
+	          panel_console.add(scrollPane_print);
 	          panel_console.add(label_console_keyboard);
 	          panel_console.add(text_console_keyboard);
 	          panel_console.add(label_console_cache);
@@ -637,6 +652,7 @@ public class console extends JFrame{
 	                              +"Luying is familiar to Java.\n "
 	                              +"Mingqian can design beautiful UI interface.\n "
 	                              +"Kai loves machine language.\n ";
+	                      
 	                      mcu.setCardBuffer(sentences);
 	                      mcu.loadProgram(Program2.PRE);
 	                      mcu.loadProgram(Program2.PROGRAM2_1);
@@ -651,8 +667,10 @@ public class console extends JFrame{
 	                      } while(cpu.getPC() <= Const.PG2_END1 && cpu.getPC() >= Const.PG2_BASE1);
 	                      
 	                      printConsole("Please enter a word need to be searched in console keyboard...");
-	                      refreshPanel();
+	                     
 	                      program2Step = 1;
+	                    //  printConsole(Integer.toString(program2Step));
+	                      refreshPanel();
 	                      
 	                  }    
 	              }
@@ -662,8 +680,9 @@ public class console extends JFrame{
 	          this.button_find.addActionListener(new java.awt.event.ActionListener(){
 	              @Override
 	              public void actionPerformed(ActionEvent e){
+	            	  
 	                  if(program2Step==1){
-	                      System.out.println("Start reading words...");
+	                	  		printConsole("Start reading words...");
 	                      if(text_console_keyboard.getText()==null|| text_console_keyboard.getText().length()==0){
 	                          JOptionPane.showMessageDialog(null, "type a word in the console keyboard!");
 	                      }else{
@@ -716,9 +735,10 @@ public class console extends JFrame{
 	                              cpu.setIR(cpu.getIntMBR());
 	                              runInstruction(cpu.getBinaryStringOfIR(), cpu, mcu);
 	                          }while(cpu.getPC() <= Const.PG2_END5 && cpu.getPC() >= Const.PG2_BASE5);
-	                          refreshPanel();                                
-	                        
+	                                                        
+	       
 	                          program2Step = 0;
+	                          refreshPanel();  
 	                      }
 	                      
 	                  }    
