@@ -1,3 +1,8 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package instruction;
 
 import cpu.CPU;
@@ -20,7 +25,9 @@ public class JNE extends Abstractinstruction {
 
 	@Override
 	public void execute(String instruction, CPU cpu, MCU mcu) throws MachineFaultException {
+		// -----------------------------------
 		// 011: JNE -> Jump if Not Equal
+		// -----------------------------------
 		r = StringUtil.binaryToDecimal(instruction.substring(6, 8));
 		ix = StringUtil.binaryToDecimal(instruction.substring(8, 10));
 		i = StringUtil.binaryToDecimal(instruction.substring(10, 11));

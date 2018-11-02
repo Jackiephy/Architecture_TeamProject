@@ -1,3 +1,8 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package instruction;
 
 import cpu.CPU;
@@ -32,14 +37,8 @@ public class SRC extends Abstractinstruction {
         this.r = StringUtil.binaryToDecimal(instruction.substring(6, 8));
         int Bd = cpu.getRnByNum(r);
         if (AL == 0) {
-        	if (LR == 0) {
-                if (Bd >= 0)
-                    Bd = (Bd >>> Ct);
-                else {
-                    String x = Integer.toBinaryString(Bd >>> Ct);
-                    x = x.replace("1111111111111111", "");
-                    Bd = Integer.parseInt(x, 2);
-                }
+            if (LR == 0) {
+                Bd = Bd >> Ct;
             }
             if (LR == 1) {
                 Bd = Bd << Ct;
@@ -47,7 +46,13 @@ public class SRC extends Abstractinstruction {
         }
         if (AL == 1) {
             if (LR == 0) {
-                Bd = Bd >> Ct;
+                if (Bd >= 0)
+                    Bd = (Bd >>> Ct);
+                else {
+                    String x = Integer.toBinaryString(Bd >>> Ct);
+                    x = x.replace("1111111111111111", "");
+                    Bd = Integer.parseInt(x, 2);
+                }
             }
             if (LR == 1) {
                 Bd = Bd << Ct;

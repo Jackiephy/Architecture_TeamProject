@@ -1,3 +1,8 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package instruction;
 
 import cpu.CPU;
@@ -19,7 +24,9 @@ public class JZ extends Abstractinstruction{
 
 	@Override
 	public void execute(String instruction, CPU cpu, MCU mcu) throws MachineFaultException {
+		// ------------------------------------------
 		// 010: JZ -> Jump if Zero
+		// ------------------------------------------
 		r = StringUtil.binaryToDecimal(instruction.substring(6, 8));
 		ix = StringUtil.binaryToDecimal(instruction.substring(8, 10));
 		i = StringUtil.binaryToDecimal(instruction.substring(10, 11));

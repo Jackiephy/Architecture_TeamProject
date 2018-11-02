@@ -643,7 +643,7 @@ public class console extends JFrame{
 	                      
 	                      //TODO: add readfiles here
 	                      //String sentences = readfiles();
-	                      String sentences = "Hello we are team 2.\n "
+	                      String sentences = "Hello we are team 5.\n "
 	                              +"Our team members are Luying Zhang, Mingqian Liu and Kai Wang.\n "
 	                              +"We are good at different fields.\n "
 	                              +"Luying is familiar to Java.\n "
@@ -684,7 +684,7 @@ public class console extends JFrame{
 	                        JOptionPane.showMessageDialog(null, "type a word in the console keyboard!");
 	                    }else{
 	                        //read word
-	                        printConsole("search reault is ");
+	                        printConsole("search result is ");
 	                        mcu.loadProgram(Program2.PROGRAM2_2);
 	                        cpu.setPC(Const.PG2_BASE2);
 	                        mcu.setKeyboardBuffer(text_console_keyboard.getText());
